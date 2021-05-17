@@ -1,0 +1,27 @@
+<button (click)="onCreateAccount()">
+  <i class="fas fa-plus"></i> Create new Account
+</button>
+
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Username</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let acc of accounts">
+      <td scope="row">{{acc.id}}</td>
+      <td scope="row">{{acc.username}}</td>
+      <td scope="row">{{acc.email}}</td>
+      <td scope="row" *ngFor="let role of acc.roles">{{role.name}}</td>
+      <td>
+        <button class=" btn-info" (click)="onEditAccount(acc.id)"><i class="far fa-edit"></i></button>
+        <button class=" btn-danger" (click)="deleteAccount(acc.id)"  style="margin-left: 10px;" ><i class="fas fa-trash"></i> </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,51 @@
+<div class="">
+  <h1>Edit Account </h1>
+
+  <form (ngSubmit)="f.form.valid && onSubmit()"  #f="ngForm">
+    <div class="form-group">
+        <label> Username</label>
+        <input type="text" class="form-control"  required
+          #username="ngModel"
+          id="username" [(ngModel)]="user.username" name="username">
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="username.errors && f.submitted">
+          Username is required!
+          </div>
+
+          <label> Email</label>
+          <input type="text" class="form-control" required #email="ngModel"
+          id="email" [(ngModel)]="user.email" name="email">
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="email.errors && f.submitted">
+          Email is required!
+          </div>
+
+          <label> Password</label>
+          <input type="password" class="form-control" required
+          minlength="6"
+          #password="ngModel"
+          id="password" [(ngModel)]="user.password" name="password">
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
+
+          <label>Role: </label>
+          <div class="custom-control" *ngFor="let role of roleList">
+            <input type="checkbox"  name="role.name" (change)="onChange(role)" >
+            <label> {{role.name}} </label>
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Update</button>
+  </form>
+</div>

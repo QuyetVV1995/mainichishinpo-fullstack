@@ -1,0 +1,38 @@
+<button (click)="onCreatePost()">
+    <i class="fas fa-plus"></i> Create new Post
+</button>
+
+<button (click)="onImportExcel()">
+  <i class="fas fa-plus"></i> Import Excel File
+</button>
+
+<button [routerLink]="['/adv']" >
+  Adv
+</button>
+
+
+
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Content</th>
+        <th scope="col">Created</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td scope="row">{{post.id}}</td>
+        <td scope="row">{{post.title}}</td>
+        <td scope="row">{{post.content| slice:0:50}}</td>
+        <td scope="row">{{post.create_at}}</td>
+        <td>
+          <button mat-button class="btn-info"  style="margin-left: 10px;" [routerLink]="['/post-detail', post.id]"><i class="far fa-eye"></i></button>
+          <button class=" btn-info"  style="margin-left: 10px;" (click)="onEditPost(post.id)"><i class="far fa-edit"></i></button>
+          <button (click)="deletePost(post.id)" class=" btn-danger" style="margin-left: 10px;" ><i class="fas fa-trash"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,23 @@
+<div class="">
+  <h1>Create Post </h1>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label> Title</label>
+        <input type="text" class="form-control"
+          id="title" [(ngModel)]="post.title" name="title">
+
+          <label>Tags</label>
+          <div class="custom-control" *ngFor="let tag of tags">
+              <input type="checkbox"  name="tag.name" (change)="onChange(tag)" >
+              <label> {{tag.name}} </label>
+          </div>
+
+          <label> Content</label>
+          <textarea type="text" class="form-control"
+          id="content" [(ngModel)]="post.content" name="content"></textarea>
+    </div>
+
+    <button class="btn btn-success" type="submit">Create</button>
+  </form>
+</div>

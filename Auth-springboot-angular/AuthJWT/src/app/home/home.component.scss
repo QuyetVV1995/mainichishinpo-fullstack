@@ -1,0 +1,24 @@
+mat-card-title{
+  color:green;
+  font-size:20px
+  }
+mat-card-subtitle{
+  font-size:10px
+  }
+
+  header{
+    position: fixed;
+    top: 0;
+     z-index: 11;
+    transition: all 250ms ease-in-out;
+  }
+  .main-header{
+    @extend header;
+    &.hidden{
+      opacity: 0;
+    }
+  }
+
+  .search{
+    border-bottom: solid 1px ;
+  }

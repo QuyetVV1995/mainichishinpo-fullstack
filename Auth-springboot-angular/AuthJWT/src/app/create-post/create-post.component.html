@@ -1,0 +1,48 @@
+<div class="">
+    <h1>Create Post </h1>
+
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+            formControlName="title"
+            id="title"
+            type="text"
+            class="form-control">
+        <div *ngIf="f.title.touched && f.title.invalid" class="alert alert-danger">
+            <div *ngIf="f.title.errors.required">Title is required.</div>
+            <div *ngIf="f.title.errors.minlength">Title should be 3 character.</div>
+        </div>
+      </div>
+      <div class="form-group">
+         <label>Tags</label>
+            <div class="custom-control" *ngFor="let tag of tags">
+                <input type="checkbox"  name="tag.name" (change)="onChange(tag)" >
+                <label> {{tag.name}} </label>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for="content">Content</label>
+        <quill-editor [styles]="{height: '200px'}"  formControlName="content" >
+
+        </quill-editor>
+      </div>
+
+      <div class="form-group">
+        <label for="file">File</label>
+        <input
+            formControlName="file"
+            id="file"
+            type="file"
+            class="form-control"
+            (change)="onFileChange($event)">
+
+    </div>
+    <div>
+      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+    </div>
+    <br>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+

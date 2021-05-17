@@ -1,0 +1,58 @@
+<div class="container">
+  <mat-form-field class="search" floatLabel="never">
+    <input matInput placeholder="Search" appHighlightOnHover [(ngModel)]="searchText">
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <app-adv></app-adv>
+</div>
+
+<br>
+<div class="container">
+  <div *ngIf="dataSource">
+    <mat-grid-list cols="3" rowHeight="0.8:1">
+      <mat-grid-tile *ngFor="let data of dataSource.content | filter: searchText ">
+
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title> {{data.title}} </mat-card-title>
+            <div>
+              <mat-card-subtitle> {{data.user.username}} </mat-card-subtitle>
+              <mat-card-subtitle> {{data.create_at}} </mat-card-subtitle>
+            </div>
+
+          </mat-card-header>
+
+          <img mat-card-image src="https://img.icons8.com/plasticine/2x/image.png" alt="img">
+          <mat-card-content>
+            <p>
+             {{data.content | slice:0:50}}...
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button class="btn-info" [routerLink]="['/post-detail', data.id]">See more...</button>
+          </mat-card-actions>
+        </mat-card>
+
+
+        <mat-card *ngIf="(dataSource.content | filter: searchText).length === 0">
+          <mat-icon mat-list-avatar>error</mat-icon>
+          <div mat-line>0 results</div>
+          <div mat-line>No matching presidents</div>
+        </mat-card>
+
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-paginator [length]="dataSource.totalElements"
+                 [pageSize]="dataSource.pageable.pageSize"
+                 [pageSizeOptions]="[5,10,25,100]"
+                 (page)="pageEvent = $event; onPaginateChange($event)"
+                 showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+
+<!-- <a [routerLink]="['/post-detail', post.id]" class="btn btn-primary">Read more...</a> -->
